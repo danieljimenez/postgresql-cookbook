@@ -3,4 +3,4 @@
 # install postgresql is necessary.
 package 'ca-certificates' do
   action :upgrade
-end
+end unless node['platform_family'] == 'mac_os_x'

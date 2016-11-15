@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-include_recipe 'postgresql::ca_certificates'
+include_recipe 'postgresql::ca_certificates' unless node['platform_family'] == 'mac_os_x'
 
 case node['platform_family']
 when 'debian'

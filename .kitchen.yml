@@ -18,6 +18,16 @@ platforms:
   - name: ubuntu-12.04
   - name: ubuntu-14.04
   - name: ubuntu-16.04
+  - name: macosx-10.10
+    run_list:
+      - build-essential
+      - homebrew
+    driver:
+      box: jhcook/osx-yosemite-10.10
+      username: vagrant
+      customize:
+        cpus: 2
+        memory: 8192
 
 suites:
 - name: default
@@ -27,6 +37,7 @@ suites:
 - name: contrib
   run_list:
   - recipe[postgresql::contrib]
+  excludes: [ "macosx-10.10" ] # macOS doesn't have contribs
   attributes:
     postgresql:
       password:
@@ -36,7 +47,7 @@ suites:
   run_list:
   - recipe[apt]
   - recipe[postgresql]
-  excludes: [ "centos-6.8", "centos-7.2", "opensuse-13.2", "opensuse-leap-42.1", "fedora-24" ]
+  excludes: [ "centos-6.8", "centos-7.2", "opensuse-13.2", "opensuse-leap-42.1", "fedora-24", "macosx-10.10" ]
   attributes:
     postgresql:
       enable_pgdg_apt: true
@@ -47,7 +58,7 @@ suites:
 - name: yum-pgdg-client
   run_list:
   - recipe[postgresql]
-  excludes: [ "ubuntu-12.04", "ubuntu-14.04", "ubuntu-16.04", "debian-7.11", "debian-8.5", "opensuse-13.2", "opensuse-leap-42.1" ]
+  excludes: [ "ubuntu-12.04", "ubuntu-14.04", "ubuntu-16.04", "debian-7.11", "debian-8.5", "opensuse-13.2", "opensuse-leap-42.1", "macosx-10.10" ]
   attributes:
     postgresql:
       enable_pgdg_yum: true
@@ -61,7 +72,6 @@ suites:
 
 - name: server
   run_list:
-  - recipe[apt]
   - recipe[postgresql::ruby]
   - recipe[postgresql::server]
   attributes:
@@ -74,7 +84,7 @@ suites:
   - recipe[apt]
   - recipe[postgresql::ruby]
   - recipe[postgresql::server]
-  excludes: [ "centos-6.8", "centos-7.2", "opensuse-13.2", "opensuse-leap-42.1", "fedora-23", "fedora-24" ]
+  excludes: [ "centos-6.8", "centos-7.2", "opensuse-13.2", "opensuse-leap-42.1", "fedora-23", "fedora-24", "macosx-10.10" ]
   attributes:
     postgresql:
       enable_pgdg_apt: true
@@ -95,7 +105,7 @@ suites:
   run_list:
   - recipe[postgresql::ruby]
   - recipe[postgresql::server]
-  excludes: [ "ubuntu-12.04", "ubuntu-14.04", "ubuntu-16.04", "debian-8.5", "opensuse-13.2", "opensuse-leap-42.1" ]
+  excludes: [ "ubuntu-12.04", "ubuntu-14.04", "ubuntu-16.04", "debian-8.5", "opensuse-13.2", "opensuse-leap-42.1", "macosx-10.10" ]
   attributes:
     postgresql:
       enable_pgdg_yum: true
@@ -114,7 +124,7 @@ suites:
   - recipe[apt]
   - recipe[postgresql]
   - recipe[postgresql::ruby]
-  excludes: [ "centos-6.8", "centos-7.2", "opensuse-13.2", "opensuse-leap-42.1", "fedora-23", "fedora-24" ]
+  excludes: [ "centos-6.8", "centos-7.2", "opensuse-13.2", "opensuse-leap-42.1", "fedora-23", "fedora-24", "macosx-10.10" ]
   attributes:
     postgresql:
       enable_pgdg_apt: true
@@ -126,7 +136,7 @@ suites:
   run_list:
   - recipe[postgresql]
   - recipe[postgresql::ruby]
-  excludes: [ "ubuntu-12.04", "ubuntu-14.04", "ubuntu-16.04", "debian-7.11", "debian-8.5", "opensuse-13.2", "opensuse-leap-42.1" ]
+  excludes: [ "ubuntu-12.04", "ubuntu-14.04", "ubuntu-16.04", "debian-7.11", "debian-8.5", "opensuse-13.2", "opensuse-leap-42.1", "macosx-10.10" ]
   attributes:
     postgresql:
       enable_pgdg_yum: true
@@ -139,7 +149,7 @@ suites:
   - recipe[apt]
   - recipe[postgresql::ruby]
   - recipe[postgresql::contrib]
-  excludes: [ "centos-6.8", "centos-7.2", "opensuse-13.1", "opensuse-13.2", "fedora-23", "fedora-24" ]
+  excludes: [ "centos-6.8", "centos-7.2", "opensuse-13.1", "opensuse-13.2", "fedora-23", "fedora-24", "macosx-10.10" ]
   attributes:
     postgresql:
       enable_pgdg_apt: true
@@ -164,7 +174,7 @@ suites:
   run_list:
   - recipe[postgresql::ruby]
   - recipe[postgresql::contrib]
-  excludes: [ "ubuntu-12.04", "ubuntu-14.04", "ubuntu-16.04", "debian-8.5", "opensuse-13.2", "opensuse-leap-42-1" ]
+  excludes: [ "centos-6.8", "ubuntu-12.04", "ubuntu-14.04", "ubuntu-16.04", "debian-8.5", "opensuse-13.2", "opensuse-leap-42-1", "macosx-10.10" ]
   attributes:
     postgresql:
       enable_pgdg_yum: true

@@ -54,6 +54,8 @@ default['postgresql']['server']['init_package'] =
     'systemd'
   when 'opensuse', 'opensuseleap'
     'systemd'
+  when 'mac_os_x'
+    'launchd'
   else
     'upstart'
   end
@@ -195,6 +197,15 @@ when 'suse' # sles 12+
   default['postgresql']['server']['packages'] = ['postgresql91-server']
   default['postgresql']['contrib']['packages'] = ['postgresql91-contrib']
   default['postgresql']['dir'] = '/var/lib/pgsql/data'
+  default['postgresql']['server']['service_name'] = 'postgresql'
+
+when 'mac_os_x'
+  default['postgresql']['assign_postgres_password'] = false
+  default['postgresql']['version'] = '9.6'
+  default['postgresql']['client']['packages'] = ['postgresql']
+  default['postgresql']['server']['packages'] = ['postgresql']
+  default['postgresql']['contrib']['packages'] = ['postgresql']
+  default['postgresql']['dir'] = ' /usr/local/var/postgres/'
   default['postgresql']['server']['service_name'] = 'postgresql'
 end
 

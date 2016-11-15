@@ -62,6 +62,8 @@ when 'debian'
 when 'suse'
   node.normal['postgresql']['config']['data_directory'] = node['postgresql']['dir']
   include_recipe 'postgresql::server_redhat'
+when 'mac_os_x'
+  node.normal['postgresql']['config']['data_directory'] = node['postgresql']['dir']
 end
 
 # Versions prior to 9.2 do not have a config file option to set the SSL
