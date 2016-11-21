@@ -179,6 +179,7 @@ suites:
     postgresql:
       enable_pgdg_yum: true
       version: "9.4"
+      setup_script: "postgresql94-setup"
       server:
         packages: [ "postgresql94-server" ]
         service_name: "postgresql-9.4"
