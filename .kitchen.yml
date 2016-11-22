@@ -183,10 +183,13 @@ suites:
       server:
         packages: [ "postgresql94-server" ]
         service_name: "postgresql-9.4"
+      client:
+        packages: [ "postgresql94-devel" ]
       password:
         postgres: "iloverandompasswordsbutthiswilldo"
       config:
         shared_preload_libraries: "pg_stat_statements"
       contrib:
+        packages: [ "postgresql94-contrib" ]
         extensions:
           - pg_stat_statements
